@@ -1,0 +1,36 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/body-parser": "^1.19.5",
+        "@types/connect": "^3.4.38",
+        "@types/cors": "^2.8.17",
+        "@types/dotenv": "^8.2.3",
+        "@types/express": "^5.0.0",
+        "@types/morgan": "^1.9.9",
+        "@types/node": "^22.7.9",
+        "dotenv": "^16.4.5",
+        "nodemon": "^3.1.7",
+        "rimraf": "^6.0.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.3"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.3",
+        "connect": "^3.7.0",
+        "cors": "^2.8.5",
+        "express": "^4.21.1",
+        "fs": "^0.0.1-security",
+        "morgan": "^1.10.0",
+        "path": "^0.12.7"
+    },
+    "scripts": {
+        "dev": "nodemon ./index.ts",
+        "start": "node ./build/index.js",
+        "build": "rimraf build && tsc",
+        "prisma:migrate": "npx prisma migrate dev",
+        "prisma:studio": "npx prisma studio"
+    }
+}

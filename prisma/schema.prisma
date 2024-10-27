@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URI")
+    shadowDatabaseUrl = env("DATABASE_SHADOW_URI")
+}
+
+model Students {
+    uuid                    String                      @id @default(uuid())
+    student_id              String                      @unique @db.VarChar(13)
+    student_firstname       String                      @db.VarChar(30)
+    student_lastname        String                      @db.VarChar(30)
+    student_year_admission  String                      @db.VarChar(4)
+    activities_participated ActivitiesParticipated[]
+    created_at              DateTime                    @default(now())
+    updated_at              DateTime                    @updatedAt
+}
+
+model Activities {
+    uuid                    String                      @id @default(uuid())
+    activity_name           String
+    activity_description    String?                     @db.Text
+    activity_department     String                      @db.VarChar(50)
+    activity_year           String                      @db.VarChar(10)
+    created_at              DateTime                    @default(now())
+    updated_at              DateTime                    @updatedAt
+}
+
+model ActivitiesParticipated {
+    id                      Int                 @id //@default(autoincrement())
+    student                 Students            @relation(fields: [student_uuid], references: [uuid])
+    student_uuid            String
+    activity_uuid           String
+    created_at              DateTime            @default(now())
+    updated_at              DateTime            @updatedAt
+}
