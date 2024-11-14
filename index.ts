@@ -37,6 +37,7 @@ app.use(limiter);
 
 
 app.use("/api", rootRouter);
+app.use("/api", studentRouter);
 
 app.listen(config.port, () =>{
     console.log(`> RestAPI Service listening on port : ${config.port} : ${config.baseUrl}:${config.port}`);

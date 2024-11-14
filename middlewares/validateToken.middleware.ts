@@ -1,7 +1,7 @@
 import { NextHandleFunction } from "connect";
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
-import { validateJWTToken } from "utils/validateJWTToken";
+import { validateJWTToken } from "../utils/validateJWTToken";
 
 export function validateToken(req: Request, res: Response, next: NextFunction): void {
     const { token } = req.cookies ?? {};

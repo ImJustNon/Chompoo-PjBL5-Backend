@@ -15,18 +15,20 @@ datasource db {
 }
 
 model Students {
-    uuid                    String                      @id @default(uuid())
+    id                      Int                         @id @default(autoincrement())
+    student_uuid            String                      @unique @default(uuid())
     student_id              String                      @unique @db.VarChar(13)
+    student_password        String                      @db.VarChar(70)
     student_firstname       String                      @db.VarChar(30)
     student_lastname        String                      @db.VarChar(30)
     student_year_admission  String                      @db.VarChar(4)
-    activities_participated ActivitiesParticipated[]
     created_at              DateTime                    @default(now())
     updated_at              DateTime                    @updatedAt
 }
 
 model Activities {
-    uuid                    String                      @id @default(uuid())
+    id                      Int                         @id @default(autoincrement())
+    activity_uuid           String                      @unique @default(uuid())
     activity_name           String
     activity_description    String?                     @db.Text
     activity_department     String                      @db.VarChar(50)
@@ -36,8 +38,7 @@ model Activities {
 }
 
 model ActivitiesParticipated {
-    id                      Int                         @id //@default(autoincrement())
-    student                 Students                    @relation(fields: [student_uuid], references: [uuid])
+    id                      Int                         @id @default(autoincrement())
     student_uuid            String      
     activity_uuid           String      
     created_at              DateTime                    @default(now())
