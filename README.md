@@ -25,3 +25,11 @@ POST /api/v1/user/student/signout
 cookie: token
 req: ?
 ```
+
+<h3>Activity Student QR</h3>
+
+```
+GET /api/v1/activity/student/qr
+cookie: token
+req: ?
+```
