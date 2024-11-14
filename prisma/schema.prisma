@@ -36,10 +36,10 @@ model Activities {
 }
 
 model ActivitiesParticipated {
-    id                      Int                 @id //@default(autoincrement())
-    student                 Students            @relation(fields: [student_uuid], references: [uuid])
-    student_uuid            String
-    activity_uuid           String
-    created_at              DateTime            @default(now())
-    updated_at              DateTime            @updatedAt
+    id                      Int                         @id //@default(autoincrement())
+    student                 Students                    @relation(fields: [student_uuid], references: [uuid])
+    student_uuid            String      
+    activity_uuid           String      
+    created_at              DateTime                    @default(now())
+    updated_at              DateTime                    @updatedAt
 }

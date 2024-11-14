@@ -4,11 +4,17 @@
     "main": "index.js",
     "license": "MIT",
     "devDependencies": {
+        "@types/axios": "^0.14.4",
+        "@types/bcrypt": "^5.0.2",
         "@types/body-parser": "^1.19.5",
         "@types/connect": "^3.4.38",
+        "@types/cookie-parser": "^1.4.7",
         "@types/cors": "^2.8.17",
+        "@types/crypto-js": "^4.2.2",
         "@types/dotenv": "^8.2.3",
         "@types/express": "^5.0.0",
+        "@types/express-rate-limit": "^6.0.2",
+        "@types/jsonwebtoken": "^9.0.7",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.7.9",
         "dotenv": "^16.4.5",
@@ -18,13 +24,21 @@
         "typescript": "^5.6.3"
     },
     "dependencies": {
+        "@prisma/client": "^5.21.1",
+        "axios": "^1.7.7",
+        "bcrypt": "^5.1.1",
         "body-parser": "^1.20.3",
         "connect": "^3.7.0",
+        "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
+        "crypto": "^1.0.1",
         "express": "^4.21.1",
+        "express-rate-limit": "^7.4.1",
         "fs": "^0.0.1-security",
+        "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.0",
-        "path": "^0.12.7"
+        "path": "^0.12.7",
+        "prisma": "^5.21.1"
     },
     "scripts": {
         "dev": "nodemon ./index.ts",

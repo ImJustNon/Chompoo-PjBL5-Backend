@@ -1,0 +1,1 @@
+{"version":3,"file":"createJWTToken.js","sourceRoot":"","sources":["../../utils/createJWTToken.ts"],"names":[],"mappings":";;;;;AAGA,wCAEC;AALD,6CAA0C;AAC1C,gEAA+B;AAE/B,SAAgB,cAAc,CAAC,IAAY,EAAE,SAAiB;IAC1D,OAAO,sBAAG,CAAC,IAAI,CAAC,IAAI,EAAE,eAAM,CAAC,SAAS,EAAE,EAAE,SAAS,EAAE,SAAS,EAAE,CAAC,CAAC;AACtE,CAAC"}

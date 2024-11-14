@@ -10,6 +10,7 @@ dotenv_1.default.config();
 exports.config = {
     port: parseInt((_a = process.env.PORT) !== null && _a !== void 0 ? _a : "8080"),
     baseUrl: (_b = process.env.BASEURL) !== null && _b !== void 0 ? _b : "",
-    allowedOrigins: ["http://127.0.0.1:8123"]
+    allowedOrigins: ["http://127.0.0.1:8123"],
+    jwtSecret: process.env.JWT_SECRET || "no"
 };
 //# sourceMappingURL=config.js.map
