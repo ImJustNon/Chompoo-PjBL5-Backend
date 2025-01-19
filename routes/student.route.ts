@@ -6,10 +6,10 @@ import { studentActivityQrController } from "../controllers/studentActivityQr.co
 const router: Router = express.Router();
 
 
-router.post("/v1/user/student/register", studentRegisterController);
-router.post("/v1/user/student/auth", studentAuthController);
-router.post("/v1/user/student/signout", validateToken, studentSignOutController);
+// router.post("/v1/user/student/register", studentRegisterController);
+// router.post("/v1/user/student/auth", studentAuthController);
+// router.post("/v1/user/student/signout", validateToken, studentSignOutController);
 
-router.get("/v1/activity/student/qr", validateToken, studentActivityQrController);
+// router.get("/v1/activity/student/qr", validateToken, studentActivityQrController);
 
 export default router;

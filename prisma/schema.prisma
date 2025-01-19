@@ -14,33 +14,73 @@ datasource db {
     shadowDatabaseUrl = env("DATABASE_SHADOW_URI")
 }
 
+model PersonPrefix {
+    prefix_id                   Int                         @id @default(autoincrement())
+    prefix_name                 String                      @db.VarChar(10)
+    prefix_name_short           String                      @db.VarChar(8)
+    gender                      String                      @db.VarChar(10)
+    students                    Students[]
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
+}
+
 model Students {
-    id                      Int                         @id @default(autoincrement())
-    student_uuid            String                      @unique @default(uuid())
-    student_id              String                      @unique @db.VarChar(13)
-    student_password        String                      @db.VarChar(70)
-    student_firstname       String                      @db.VarChar(30)
-    student_lastname        String                      @db.VarChar(30)
-    student_year_admission  String                      @db.VarChar(4)
-    created_at              DateTime                    @default(now())
-    updated_at              DateTime                    @updatedAt
+    student_id                  String                      @id @db.VarChar(13)
+    student_uuid                String                      @unique @default(uuid())
+    student_password            String                      @db.VarChar(70)
+    student_prefix              PersonPrefix                @relation(fields: [student_prefix_id], references: [prefix_id])
+    student_prefix_id           Int         
+    student_firstname           String                      @db.VarChar(30)
+    student_lastname            String                      @db.VarChar(30)
+    student_year_admission      String                      @db.VarChar(4)
+    department                  Departments                 @relation(fields: [student_department_id], references: [department_id])      
+    student_department_id       String
+    activities_participated     ActivitiesParticipated[]
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
+}
+
+model Departments {
+    students                    Students[]       
+    activities                  Activities[]
+    department_id               String                      @id 
+    department_fullname_th      String
+    department_fullname_en      String           
+    department_type             String                  
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
+}
+
+model ActivityType {
+    activities                  Activities[]
+    activitytype_id             Int                         @id
+    activitytype_name           String
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
 }
 
 model Activities {
-    id                      Int                         @id @default(autoincrement())
-    activity_uuid           String                      @unique @default(uuid())
-    activity_name           String
-    activity_description    String?                     @db.Text
-    activity_department     String                      @db.VarChar(50)
-    activity_year           String                      @db.VarChar(10)
-    created_at              DateTime                    @default(now())
-    updated_at              DateTime                    @updatedAt
+    activity_id                 String                      @id @default(uuid())
+    activity_name               String                      @db.VarChar(50)
+    activity_description        String?                     @db.Text
+    activity_department         Departments                 @relation(fields: [activity_department_id], references: [department_id])
+    activity_department_id      String
+    activity_date               String                      @db.VarChar(20) //เวลา UTC
+    activity_type               ActivityType                @relation(fields: [activity_type_id], references: [activitytype_id])
+    activity_type_id            Int
+    activity_participated       ActivitiesParticipated[]
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
 }
 
 model ActivitiesParticipated {
     id                      Int                         @id @default(autoincrement())
-    student_uuid            String      
-    activity_uuid           String      
+    student                 Students                    @relation(fields: [student_id], references: [student_id])
+    student_id              String
+    activity                Activities                  @relation(fields: [activity_id], references: [activity_id])    
+    activity_id             String      
+    activity_checked        Boolean                     @default(true)
+    activity_checked_late   Boolean                     @default(false)
     created_at              DateTime                    @default(now())
     updated_at              DateTime                    @updatedAt
 }
