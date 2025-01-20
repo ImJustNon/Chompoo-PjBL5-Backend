@@ -10,19 +10,48 @@ export async function rootController(req: Request, res: Response){
     //     ping: `${Date.now() - reqTime}ms`
     // });
 
-    const student = await prisma.students.findMany({
+    const activity = await prisma.students.findMany({
         include: {
-            department: true,
+            student_roles: {
+                include: {
+                    role: true
+                }
+            },
             student_prefix: true,
-            activities_participated: true
+            department: true,
+            activities_participated: true,
         }
     });
 
-    const prefix = await prisma.personPrefix.findMany({
-        include: {
-            students: true
-        }
-    })
-    res.status(200).json(prefix);
+    // await prisma.studentRoles.create({
+    //     data: {
+    //         student_id: "65202910002",
+    //         role_id: 2
+    //     }
+    // });
+
+    // await prisma.students.update({
+    //     include: {
+    //         roles: true
+    //     },
+    //     where: {
+    //         student_id: "65202910002",
+    //     },
+    //     data: {
+    //         roles: {
+    //             disconnect: [
+    //                 {role_id: 1}
+    //             ]
+    //         }
+    //     }
+    // });
+
+    // const prefix = await prisma.personPrefix.findMany({
+    //     include: {
+    //         students: true,
+            
+    //     }
+    // })
+    res.status(200).json(activity);
 }
 

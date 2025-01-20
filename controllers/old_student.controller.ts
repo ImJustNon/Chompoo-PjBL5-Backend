@@ -19,6 +19,7 @@ export async function studentRegisterController(req: Request, res: Response): Pr
         return;
     }
 
+
     if(student_password.length < 5 || student_password.length > 15){
         res.status(400).json({
             status: "FAIL",
