@@ -14,6 +14,16 @@ datasource db {
     shadowDatabaseUrl = env("DATABASE_SHADOW_URI")
 }
 
+model Roles {
+    role_id                     Int                         @id @default(autoincrement())
+    role_name                   String                      
+    role_description            String                      @db.Text
+    activities                  Activities[]
+    students                    Students[]
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
+}
+
 model PersonPrefix {
     prefix_id                   Int                         @id @default(autoincrement())
     prefix_name                 String                      @db.VarChar(10)
@@ -35,7 +45,8 @@ model Students {
     student_year_admission      String                      @db.VarChar(4)
     department                  Departments                 @relation(fields: [student_department_id], references: [department_id])      
     student_department_id       String
-    activities_participated     ActivitiesParticipated[]
+    activities_participated     ActivitiesParticipated[]          
+    roles                       Roles[]
     created_at                  DateTime                    @default(now())
     updated_at                  DateTime                    @updatedAt
 }
@@ -69,18 +80,20 @@ model Activities {
     activity_type               ActivityType                @relation(fields: [activity_type_id], references: [activitytype_id])
     activity_type_id            Int
     activity_participated       ActivitiesParticipated[]
+    activity_role               Roles                       @relation(fields: [activity_role_admin_id], references: [role_id])
+    activity_role_admin_id      Int
     created_at                  DateTime                    @default(now())
     updated_at                  DateTime                    @updatedAt
 }
 
 model ActivitiesParticipated {
-    id                      Int                         @id @default(autoincrement())
-    student                 Students                    @relation(fields: [student_id], references: [student_id])
-    student_id              String
-    activity                Activities                  @relation(fields: [activity_id], references: [activity_id])    
-    activity_id             String      
-    activity_checked        Boolean                     @default(true)
-    activity_checked_late   Boolean                     @default(false)
-    created_at              DateTime                    @default(now())
-    updated_at              DateTime                    @updatedAt
+    id                          Int                         @id @default(autoincrement())
+    student                     Students                    @relation(fields: [student_id], references: [student_id])
+    student_id                  String
+    activity                    Activities                  @relation(fields: [activity_id], references: [activity_id])    
+    activity_id                 String      
+    activity_checked            Boolean                     @default(true)
+    activity_checked_late       Boolean                     @default(false)
+    created_at                  DateTime                    @default(now())
+    updated_at                  DateTime                    @updatedAt
 }

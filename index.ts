@@ -14,6 +14,7 @@ import rateLimit, { Options, RateLimitRequestHandler } from "express-rate-limit"
 import { createCROS } from "./middlewares/createCORS.middleware";
 import { createRateLimiter } from "./middlewares/createRateLimiter.middleware";
 import cookieParser from "cookie-parser";
+import adminRouter from "./routes/admin.route";
 
 const app: Application = express();
 
@@ -38,6 +39,7 @@ app.use(limiter);
 
 app.use("/api", rootRouter);
 app.use("/api", studentRouter);
+app.use("/api", adminRouter);
 
 app.listen(config.port, () =>{
     console.log(`> RestAPI Service listening on port : ${config.port} : ${config.baseUrl}:${config.port}`);

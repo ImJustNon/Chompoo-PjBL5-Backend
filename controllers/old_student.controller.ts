@@ -30,22 +30,22 @@ export async function studentRegisterController(req: Request, res: Response): Pr
     try {
         const encryptedPass: string = await createEncryptPass(student_password);
 
-        const createStudent = await prisma.students.create({
-            data: {
-                student_id: student_id,
-                student_password: encryptedPass,
-                student_firstname: student_firstname,
-                student_lastname: student_lastname,
-                student_year_admission: calculateYearOfAdmission(student_id),
-            },
-            select: {
-                student_uuid: true
-            }
-        });
+        // const createStudent = await prisma.students.create({
+        //     data: {
+        //         student_id: student_id,
+        //         student_password: encryptedPass,
+        //         student_firstname: student_firstname,
+        //         student_lastname: student_lastname,
+        //         student_year_admission: calculateYearOfAdmission(student_id),
+        //     },
+        //     select: {
+        //         student_uuid: true
+        //     }
+        // });
 
-        const userToken: string = createJWTToken({
-            uuid: createStudent.student_uuid,
-        }, "1d");
+        const userToken: string = "" //createJWTToken({
+        //     uuid: createStudent.student_uuid,
+        // }, "1d");
 
         res.cookie("token", userToken, {
             maxAge: (30 * 60) * 1000, // 30 min
