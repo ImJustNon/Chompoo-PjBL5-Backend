@@ -17,7 +17,7 @@ datasource db {
 model Roles {
     role_id                     Int                         @id @default(autoincrement())
     role_name                   String                      
-    role_description            String                      @db.Text
+    role_description            String?                      @db.Text
     activities                  Activities[]
     students                    StudentRoles[]
     created_at                  DateTime                    @default(now())

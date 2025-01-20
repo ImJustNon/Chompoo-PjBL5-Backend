@@ -11,7 +11,7 @@ export async function userStudentMeController(req: Request, res: Response): Prom
     const student_uuid: string = jwtData.uuid;
 
     try {
-        const findStudent = await prisma.students.findMany({
+        const findStudent = await prisma.students.findUnique({
             include: {
                 student_prefix: true,
                 department: true,
